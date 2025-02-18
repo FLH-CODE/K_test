@@ -1,0 +1,51 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #214259; /* Bakgrundsfärg */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Förhindra scrollning */
+  }
+  
+  .centered-text {
+    font-size: 50px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+  }
+    /* Lägg till stilarna för menyn från home.css */
+
+    .menu {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .menu a {
+      text-decoration: none;
+      font-size: 50px;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    
+    .menu a i {
+      margin-right: 10px;
+      font-size: 40px; /* Justera storleken på ikonen för att matcha texten */
+      vertical-align: bottom; /* Justera för att linjera med underkanten */
+    }
+    
+    .menu a:hover {
+      color: #ff8080;
+    }
