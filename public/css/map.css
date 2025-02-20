@@ -168,30 +168,14 @@
     color: #ff8080;
   }
 
-
-/* Stilar för zoom-knappar */
+/* Remove zoom-controls styles */
 .zoom-controls {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: none;
 }
 
 .zoom-button {
-  background-color: #ffffff;
-  border: none;
-  padding: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.zoom-button:hover {
-  background-color: #f0f0f0;
-}
+  display: none;
+  }
 
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {

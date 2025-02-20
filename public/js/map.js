@@ -65,33 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Hantera zoom-funktionalitet
-    const zoomInButton = document.getElementById('zoom-in');
-    const zoomOutButton = document.getElementById('zoom-out');
-    const resetZoomButton = document.getElementById('reset-zoom'); // Lägg till denna rad
+    // Hantera zoom och pan-funktionalitet
     let scale = 1;
-
-    zoomInButton.addEventListener('click', function() {
-      scale += 0.1;
-      svgElement.style.transform = `scale(${scale})`;
-    });
-
-    zoomOutButton.addEventListener('click', function() {
-      scale = Math.max(0.1, scale - 0.1);
-      svgElement.style.transform = `scale(${scale})`;
-    });
-
-    // Hantera återställning av zoom
-    resetZoomButton.addEventListener('click', function() { // Lägg till denna funktion
-      scale = 1;
-      svgElement.style.transform = `scale(${scale})`;
-    });
-
-    // Hantera pan-funktionalitet
     let isPanning = false;
     let startX, startY;
     let currentX = 0, currentY = 0;
 
+    // Pan functionality
     svgElement.addEventListener('mousedown', function(event) {
       isPanning = true;
       startX = event.clientX - currentX;
@@ -114,6 +94,48 @@ document.addEventListener('DOMContentLoaded', function() {
     svgElement.addEventListener('mouseleave', function() {
       isPanning = false;
       svgElement.style.cursor = 'default';
+    });
+
+    // Zoom functionality for web
+    svgElement.addEventListener('wheel', function(event) {
+      if (event.shiftKey) {
+        event.preventDefault();
+        scale += event.deltaY * -0.005; // Adjusted zoom level
+        scale = Math.min(Math.max(0.5, scale), 4);
+        svgElement.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+      }
+    });
+
+    // Zoom functionality for mobile
+    let initialDistance = null;
+
+    svgElement.addEventListener('touchstart', function(event) {
+      if (event.touches.length === 2) {
+        initialDistance = Math.hypot(
+          event.touches[0].pageX - event.touches[1].pageX,
+          event.touches[0].pageY - event.touches[1].pageY
+        );
+      }
+    });
+
+    svgElement.addEventListener('touchmove', function(event) {
+      if (event.touches.length === 2 && initialDistance) {
+        event.preventDefault();
+        const currentDistance = Math.hypot(
+          event.touches[0].pageX - event.touches[1].pageX,
+          event.touches[0].pageY - event.touches[1].pageY
+        );
+        scale *= currentDistance / initialDistance;
+        scale = Math.min(Math.max(0.5, scale), 4);
+        svgElement.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+        initialDistance = currentDistance;
+      }
+    });
+
+    svgElement.addEventListener('touchend', function(event) {
+      if (event.touches.length < 2) {
+        initialDistance = null;
+      }
     });
   });
 
