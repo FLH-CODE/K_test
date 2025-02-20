@@ -203,4 +203,11 @@ document.addEventListener('DOMContentLoaded', function() {
   filterToggle.addEventListener('click', function() {
     filterPanel.classList.toggle('show');
   });
+
+  // Prevent default touch actions to avoid page refresh on mobile
+  document.addEventListener('touchmove', function(event) {
+    if (event.touches.length === 1) {
+      event.preventDefault();
+    }
+  }, { passive: false });
 });
