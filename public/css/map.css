@@ -1,4 +1,4 @@
-  #filterPanel {
+#filterPanel {
     position: absolute;
     top: 40px; /* Placera högst upp */
     left: 50%; /* Centrera horisontellt */
@@ -210,4 +210,25 @@
   .menu a {
       font-size: 20px;
   }
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
