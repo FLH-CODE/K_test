@@ -198,4 +198,9 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = targetUrl;
     });
   });
+
+  const filterToggle = document.getElementById('filterToggle');
+  filterToggle.addEventListener('click', function() {
+    filterPanel.classList.toggle('show');
+  });
 });

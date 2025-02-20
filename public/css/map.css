@@ -1,172 +1,191 @@
 #filterPanel {
-    position: absolute;
-    top: 40px; /* Placera högst upp */
-    left: 50%; /* Centrera horisontellt */
-    transform: translateX(-50%);
-    display: flex; /* Gör checkboxarna horisontellt arrangerade */
-    flex-wrap: nowrap; /* Förhindrar att de bryts till en ny rad */
-    gap: 100px; /* Öka mellanrummet mellan kategorier */
-    background-color: transparent; /* Ingen bakgrundsfärg */
-    font-family: Arial, sans-serif; /* Typsnitt */
-    font-size: 32px; /* Gör texten större */
-    color: #f3b9b3; /* Textfärg */
-    z-index: 10; /* Placera ovanför SVG:n */
-    max-width: 90vw; /* Begränsa bredden om nödvändigt */
-    overflow-x: auto; /* Lägger till horisontell scroll om det behövs */
-  }
-  
-  #filterPanel label {
-    display: flex; /* Gör text och checkbox horisontellt arrangerade */
-    align-items: center; /* Vertikal justering av text och checkbox */
-    cursor: pointer;
-    white-space: nowrap; /* Förhindrar radbrytning för enskilda etiketter */
-  }
-  
-  #filterPanel input {
-    margin-right: 10px; /* Avstånd mellan checkbox och text */
-    accent-color: #f3b9b3; /* Anpassa checkboxens färg */
-  }
-  
-  #filterPanel input[type="checkbox"] {
-    width: 25px; /* Gör checkboxarna större */
-    height: 25px; /* Gör checkboxarna större */
-    border: 2px solid #f3b9b3; /* Rosa linje runt checkboxen */
-    border-radius: 4px; /* Gör hörnen lätt rundade */
-    background-color: transparent; /* Ingen fyllning */
-    appearance: none; /* Ta bort standardstilen för checkboxen */
-    outline: none; /* Ingen ytterligare kant vid fokus */
-    cursor: pointer;
-  }
-  
-  #filterPanel input[type="checkbox"]:checked {
-    background-color: transparent; /* Ingen fyllning när den är markerad */
-    border: 2px solid #f3b9b3; /* Behåll rosa linje */
-  }
-  
-  #filterPanel input[type="checkbox"]:checked::before {
-    content: '✔'; /* Rosa checkmarkering */
-    display: block;
-    color: #f3b9b3; /* Rosa färg på checkmarkeringen */
-    font-size: 18px; /* Storlek på checkmarkeringen */
-    text-align: center;
-    line-height: 25px; /* Placera checkmarkeringen i mitten */
-  }
-      /* Grundläggande styling för body och SVG */
-  body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; /* Ingen horisontell scrollning */
-    overflow-y: auto; /* Endast vertikal scrollning */
-    background-color: #214259;
-  }
-  
-  #mapContainer {
-    height: 100vh; /* Kartan fyller hela höjden av skärmen */
-  }
-  
-  svg {
-    width: 100vw; /* Fyll hela bredden */
-    height: 100%; /* Fyll hela höjden inom sin container */
-    display: block;
-  }  
-      /* Styling för faktarutan */
-       .info-box {
-      position: absolute;
-      padding: 10px 15px; /* Extra padding för text */
-      background-color: #18333d; /* Bakgrundsfärgen */
-      color: #f3b9b3; /* Textfärgen */
-      font-family: Arial, sans-serif; /* Typsnitt */
-      font-size: 16px; /* Textstorlek */
-      border-radius: 10px; /* Rundade hörn */
-      display: none; /* Dold som standard */
-      pointer-events: none;
-      white-space: nowrap; /* Hindrar texten från att radbrytas */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Mindre skugga */
-      z-index: 1000; /* Se till att boxarna visas över andra element */
-    }
-  
-  .info-box h3 {
-    font-size: 14px; /* Mindre rubrikstorlek */
-    font-weight: normal; /* Gör texten icke-fet */
-    margin: 0; /* Ingen extra marginal */
-  }
-  
-  .info-box::after {
-    content: '';
-    position: absolute;
-    bottom: -30px; /* Flytta pilen längre från rutan */
-    left: 5px; /* Justera pilens horisontella position */
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 40px 10px 0 10px; /* Öka höjden (första värdet) */
-    border-color: #18333d transparent transparent transparent; /* Matchar rutan med den nya färgen */
-  }
-  
-  /* Styling för klick-popup */
-  .click-box {
-    position: fixed; /* Fast position relativt till fönstret */
-    bottom: 20px; /* Avstånd från botten */
-    right: 40px; /* Justera detta värde för att flytta rutan mer åt vänster från högerkanten */
-    padding: 20px; /* Inre marginal */
-    background-color: #18333d; /* Mörkblå bakgrund */
-    color: #f3b9b3; /* Rosa textfärg */
-    font-family: Arial, sans-serif; /* Typsnitt */
-    font-size: 14px; /* Textstorlek */
-    border-radius: 10px; /* Rundade hörn */
-    border: none; /* Ta bort kantlinjen */
-    display: none; /* Dölj rutan som standard */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Mjuk skugga */
-    width: 300px; /* Fast bredd */
-    z-index: 1000; /* Se till att boxen visas över andra element */
-  }
-  
-  .click-box h3 {
-    font-size: 18px; /* Rubrikstorlek */
-    font-weight: bold; /* Fetstil */
-    color: #f3b9b3; /* Rosa rubrik */
-    margin-bottom: 10px; /* Avstånd under rubriken */
-  }
-  
-  .click-box p {
-    margin: 0; /* Ingen marginal för paragraftext */
-    color: #f3b9b3; /* Rosa färg för paragraftexten */
-  }
+  position: absolute;
+  top: 40px; /* Placera högst upp */
+  left: 50%; /* Centrera horisontellt */
+  transform: translateX(-50%);
+  display: flex; /* Gör checkboxarna horisontellt arrangerade */
+  flex-wrap: nowrap; /* Förhindrar att de bryts till en ny rad */
+  gap: 100px; /* Öka mellanrummet mellan kategorier */
+  background-color: transparent; /* Ingen bakgrundsfärg */
+  font-family: Arial, sans-serif; /* Typsnitt */
+  font-size: 32px; /* Gör texten större */
+  color: #f3b9b3; /* Textfärg */
+  z-index: 10; /* Placera ovanför SVG:n */
+  max-width: 90vw; /* Begränsa bredden om nödvändigt */
+  overflow-x: auto; /* Lägger till horisontell scroll om det behövs */
+}
 
-  /* Lägg till stilarna för menyn från home.css */
+#filterToggle {
+  display: none; /* Dölj knappen som standard */
+  position: left;
+  top: 10px;
+  left: 10px;
+  /*transform: translateX(-50%);*/
+  background-color: #18333d;
+  color: #f3b9b3;
+  font-family: Arial, sans-serif;
+  font-size: 32px; /* Samma storlek som filterPanel */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 11; /* Placera ovanför filterPanel */
+}
 
-  .menu {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .menu a {
-    text-decoration: none;
-    font-size: 50px;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    transition: color 0.3s;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .menu a i {
-    margin-right: 10px;
-    font-size: 40px; /* Justera storleken på ikonen för att matcha texten */
-    vertical-align: bottom; /* Justera för att linjera med underkanten */
-  }
-  
-  .menu a:hover {
-    color: #ff8080;
-  }
+#filterPanel label {
+  display: flex; /* Gör text och checkbox horisontellt arrangerade */
+  align-items: center; /* Vertikal justering av text och checkbox */
+  cursor: pointer;
+  white-space: nowrap; /* Förhindrar radbrytning för enskilda etiketter */
+}
+
+#filterPanel input {
+  margin-right: 10px; /* Avstånd mellan checkbox och text */
+  accent-color: #f3b9b3; /* Anpassa checkboxens färg */
+}
+
+#filterPanel input[type="checkbox"] {
+  width: 25px; /* Gör checkboxarna större */
+  height: 25px; /* Gör checkboxarna större */
+  border: 2px solid #f3b9b3; /* Rosa linje runt checkboxen */
+  border-radius: 4px; /* Gör hörnen lätt rundade */
+  background-color: transparent; /* Ingen fyllning */
+  appearance: none; /* Ta bort standardstilen för checkboxen */
+  outline: none; /* Ingen ytterligare kant vid fokus */
+  cursor: pointer;
+}
+
+#filterPanel input[type="checkbox"]:checked {
+  background-color: transparent; /* Ingen fyllning när den är markerad */
+  border: 2px solid #f3b9b3; /* Behåll rosa linje */
+}
+
+#filterPanel input[type="checkbox"]:checked::before {
+  content: '✔'; /* Rosa checkmarkering */
+  display: block;
+  color: #f3b9b3; /* Rosa färg på checkmarkeringen */
+  font-size: 18px; /* Storlek på checkmarkeringen */
+  text-align: center;
+  line-height: 25px; /* Placera checkmarkeringen i mitten */
+}
+
+/* Grundläggande styling för body och SVG */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Ingen horisontell scrollning */
+  overflow-y: auto; /* Endast vertikal scrollning */
+  background-color: #214259;
+}
+
+#mapContainer {
+  height: 100vh; /* Kartan fyller hela höjden av skärmen */
+}
+
+svg {
+  width: 100vw; /* Fyll hela bredden */
+  height: 100%; /* Fyll hela höjden inom sin container */
+  display: block;
+}
+
+/* Styling för faktarutan */
+.info-box {
+  position: absolute;
+  padding: 10px 15px; /* Extra padding för text */
+  background-color: #18333d; /* Bakgrundsfärgen */
+  color: #f3b9b3; /* Textfärgen */
+  font-family: Arial, sans-serif; /* Typsnitt */
+  font-size: 16px; /* Textstorlek */
+  border-radius: 10px; /* Rundade hörn */
+  display: none; /* Dold som standard */
+  pointer-events: none;
+  white-space: nowrap; /* Hindrar texten från att radbrytas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Mindre skugga */
+  z-index: 1000; /* Se till att boxarna visas över andra element */
+}
+
+.info-box h3 {
+  font-size: 14px; /* Mindre rubrikstorlek */
+  font-weight: normal; /* Gör texten icke-fet */
+  margin: 0; /* Ingen extra marginal */
+}
+
+.info-box::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; /* Flytta pilen längre från rutan */
+  left: 5px; /* Justera pilens horisontella position */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 40px 10px 0 10px; /* Öka höjden (första värdet) */
+  border-color: #18333d transparent transparent transparent; /* Matchar rutan med den nya färgen */
+}
+
+/* Styling för klick-popup */
+.click-box {
+  position: fixed; /* Fast position relativt till fönstret */
+  bottom: 20px; /* Avstånd från botten */
+  right: 40px; /* Justera detta värde för att flytta rutan mer åt vänster från högerkanten */
+  padding: 20px; /* Inre marginal */
+  background-color: #18333d; /* Mörkblå bakgrund */
+  color: #f3b9b3; /* Rosa textfärg */
+  font-family: Arial, sans-serif; /* Typsnitt */
+  font-size: 14px; /* Textstorlek */
+  border-radius: 10px; /* Rundade hörn */
+  border: none; /* Ta bort kantlinjen */
+  display: none; /* Dölj rutan som standard */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Mjuk skugga */
+  width: 300px; /* Fast bredd */
+  z-index: 1000; /* Se till att boxen visas över andra element */
+}
+
+.click-box h3 {
+  font-size: 18px; /* Rubrikstorlek */
+  font-weight: bold; /* Fetstil */
+  color: #f3b9b3; /* Rosa rubrik */
+  margin-bottom: 10px; /* Avstånd under rubriken */
+}
+
+.click-box p {
+  margin: 0; /* Ingen marginal för paragraftext */
+  color: #f3b9b3; /* Rosa färg för paragraftexten */
+}
+
+/* Lägg till stilarna för menyn från home.css */
+
+.menu {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu a {
+  text-decoration: none;
+  font-size: 50px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.menu a i {
+  margin-right: 10px;
+  font-size: 40px; /* Justera storleken på ikonen för att matcha texten */
+  vertical-align: bottom; /* Justera för att linjera med underkanten */
+}
+
+.menu a:hover {
+  color: #ff8080;
+}
 
 /* Remove zoom-controls styles */
 .zoom-controls {
@@ -175,40 +194,63 @@
 
 .zoom-button {
   display: none;
-  }
+}
 
 /* Media Queries for Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1850px) {
+  #filterPanel {
+    display: none; /* Dölj filterPanel som standard */
+    flex-wrap: wrap; /* Tillåt radbrytning */
+    gap: 20px; /* Minska mellanrummet mellan kategorier */
+    justify-content: flex-start; /* Justera till vänster */
+    left: 20px; /* Flytta till vänster med marginal */
+    top: 80px; /* Flytta till vänster med marginal */
+    transform: none; /* Ta bort transform */
+  }
+
+  #filterToggle {
+    display: block; /* Visa knappen */
+  }
+
+  #filterPanel.show {
+    display: flex; /* Visa filterPanel när klassen 'show' är tillagd */
+  }
+
+  #filterPanel label {
+    width: 100%; /* Gör varje etikett 100% bred */
+    justify-content: flex-start; /* Justera innehållet till vänster */
+  }
+
   .running-text {
-      font-size: 50px;
-      top: 10px;
-      left: 10px;
+    font-size: 50px;
+    top: 10px;
+    left: 10px;
   }
 
   .menu {
-      bottom: 20px;
-      right: 20px;
+    bottom: 20px;
+    right: 20px;
   }
 
   .menu a {
-      font-size: 30px;
+    font-size: 30px;
   }
 }
 
 @media (max-width: 480px) {
   .running-text {
-      font-size: 30px;
-      top: 5px;
-      left: 5px;
+    font-size: 30px;
+    top: 5px;
+    left: 5px;
   }
 
   .menu {
-      bottom: 10px;
-      right: 10px;
+    bottom: 10px;
+    right: 10px;
   }
 
   .menu a {
-      font-size: 20px;
+    font-size: 20px;
   }
 }
 
