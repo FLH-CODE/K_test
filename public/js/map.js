@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let startX, startY;
     let currentX = 0, currentY = 0;
 
-    // Pan functionality
+    // Pan functionality for web
     svgElement.addEventListener('mousedown', function(event) {
       isPanning = true;
       startX = event.clientX - currentX;
@@ -106,37 +106,66 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Zoom functionality for mobile
+    // Pan and zoom functionality for mobile
     let initialDistance = null;
+    let initialScale = scale;
+    let initialX = 0, initialY = 0;
 
     svgElement.addEventListener('touchstart', function(event) {
-      if (event.touches.length === 2) {
+      if (event.touches.length === 1) {
+        isPanning = true;
+        startX = event.touches[0].clientX - currentX;
+        startY = event.touches[0].clientY - currentY;
+      } else if (event.touches.length === 2) {
         initialDistance = Math.hypot(
           event.touches[0].pageX - event.touches[1].pageX,
           event.touches[0].pageY - event.touches[1].pageY
         );
+        initialScale = scale;
+        initialX = currentX;
+        initialY = currentY;
+        event.preventDefault(); // Prevent default to avoid zooming the entire page
       }
     });
 
     svgElement.addEventListener('touchmove', function(event) {
-      if (event.touches.length === 2 && initialDistance) {
+      if (event.touches.length === 1 && isPanning) {
+        event.preventDefault();
+        currentX = event.touches[0].clientX - startX;
+        currentY = event.touches[0].clientY - startY;
+        svgElement.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+      } else if (event.touches.length === 2 && initialDistance) {
         event.preventDefault();
         const currentDistance = Math.hypot(
           event.touches[0].pageX - event.touches[1].pageX,
           event.touches[0].pageY - event.touches[1].pageY
         );
-        scale *= currentDistance / initialDistance;
-        scale = Math.min(Math.max(0.5, scale), 4);
+        scale = Math.min(Math.max(0.5, initialScale * (currentDistance / initialDistance)), 4);
+        currentX = initialX - ((scale - initialScale) * (event.touches[0].pageX + event.touches[1].pageX) / 2);
+        currentY = initialY - ((scale - initialScale) * (event.touches[0].pageY + event.touches[1].pageY) / 2);
         svgElement.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
-        initialDistance = currentDistance;
       }
     });
 
     svgElement.addEventListener('touchend', function(event) {
       if (event.touches.length < 2) {
         initialDistance = null;
+        isPanning = false;
       }
     });
+
+    // Prevent default touch actions to avoid zooming the entire page
+    svgElement.addEventListener('touchstart', function(event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+
+    svgElement.addEventListener('touchmove', function(event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
   });
 
   // Filterfunktion
