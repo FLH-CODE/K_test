@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const saveButton = document.getElementById('saveButton');
   let selectedElement = null;
 
+  // Fetch the SVG file and load it into the container
   fetch('images/map.svg')
     .then(response => {
       if (!response.ok) {
@@ -24,10 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
       const buildings = svgDoc.querySelectorAll('.building');
       console.log('Buildings found:', buildings.length);
 
+      // Add click event listeners to each building element
       buildings.forEach(building => {
         building.addEventListener('click', function(event) {
           selectedElement = event.target;
-          console.log('Element clicked:', selectedElement); // Logga elementet som klickades
+          console.log('Element clicked:', selectedElement); // Log the clicked element
           titleInput.value = selectedElement.getAttribute('data-title') || '';
           descriptionInput.value = selectedElement.getAttribute('data-description') || '';
           categoryInput.value = selectedElement.getAttribute('data-category') || '';
@@ -36,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .catch(error => console.error('Error loading SVG:', error));
 
+  // Save the edited attributes to the SVG file
   saveButton.addEventListener('click', function() {
     if (selectedElement) {
       selectedElement.setAttribute('data-title', titleInput.value);
@@ -52,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(response => response.text())
       .then(message => {
-        alert(message);
+        alert(message); // Display the server response message
       })
       .catch(error => console.error('Error saving SVG:', error));
     } else {

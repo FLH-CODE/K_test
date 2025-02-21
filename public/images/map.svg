@@ -3,15 +3,29 @@
   <defs>
     <style>
       .building {
-        fill: #1d3d4f; /* Grundfärg */
+        fill: #0a161c; /* Grundfärg tidigare#1d3d4f*/
+	fill-opacity: 0.4;
         transition: fill 0.3s ease; /* Smidig övergång */
         cursor: pointer; /* Lägg till en pekare för att indikera att elementen är klickbara */
       }
 
       .building:hover {
-        fill: rgba(255, 128, 128, 0.4); /* Rosa färg med 70% opacitet vid hover */
+    	stroke: #ff8080;
+    	stroke-width: 1.5px; 
+        fill: #ff8080; 
+	fill-opacity: 0.5;
         cursor: pointer; /* Handpekare vid hover */
       }
+
+	/* Highlight all of category when hover over checkbox */
+	.highlight { 
+    	stroke: #ff8080;
+    	stroke-width: 1.5px; 
+    	fill: #ff8080; 
+	fill-opacity: 0.5;
+    	transition: all 0.3s ease-in-out;
+	}
+
 
       .linked-group:hover .building {
         fill: rgba(255, 128, 128, 0.4); /* Rosa färg vid hover */
@@ -26,16 +40,16 @@
         fill: #ff8080; /* Ensure marked color is consistent with hover */
       }
 
-      .cls-1 { fill: #1d3d4f; }
+      .cls-1 { fill: #1d3d4f; } */Bef byggnader
       .cls-2 { stroke-width: .3px; }
       .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 { fill: none; }
       .cls-2, .cls-6 { stroke: #18313f; stroke-miterlimit: 10; }
       .cls-3 { stroke-width: .4px; }
       .cls-5 {
-        stroke: #ff8080; /* Exempel på kantfärg */
+        stroke: #ff8080; /* Ikoner */
         stroke-width: 1px; /* Exempel på kantbredd */
       }
-      .cls-3, .cls-4 { stroke: #ff8080; }
+      .cls-3, .cls-4 { stroke: #ff8080; } /* lines nya byggnader */
       .cls-3, .cls-4, .cls-5 { stroke-linecap: round; stroke-linejoin: round; }
       .cls-6 { stroke-width: .2px; }
       .cls-3 { stroke-width: .4px; }
@@ -533,7 +547,7 @@
       <polygon class="building" points="447.88 540.24 447.88 541.68 441.76 543.12 440.56 541.56 440.56 540.36 439.36 538.8 439.36 537.6 441.82 536.58 444.28 536.4 446.14 538.8 446.68 538.68 447.28 538.92 447.88 540.24" data-title="Oh la la Byggnad" data-description="En kort beskrivning av området..." data-category="residentials"></polygon>
       <polygon class="building" points="492.4 601.92 492.4 602.58 487.36 604.08 487.06 603.72 481.66 605.4 480.82 606.78 477.7 607.74 474.34 603.66 474.34 599.22 476.56 597.78 476.92 598.26 478.42 597.3 478.78 597.78 480.22 596.82 480.64 597.3 482.08 596.34 482.5 596.82 483.16 596.4 483.16 595.44 485.68 593.88 488.14 594.12 488.56 594.6 492.94 594.48 495.7 597.84 495.7 600.9 492.4 601.92" data-title="Oh la la Byggnad" data-description="En kort beskrivning av området..." data-category="residentials"></polygon>
       <polygon class="building" points="496.48 605.16 496.48 607.56 493.78 608.4 492.58 609.96 483.28 612.84 481.42 610.5 481.42 606.9 483.94 605.4 484.36 605.88 486.16 604.86 486.58 605.34 488.38 604.32 488.74 604.8 490.54 603.72 490.96 604.26 492.76 603.18 493.12 603.66 494.56 602.82 496.48 605.16" data-title="Oh la la Byggnad" data-description="En kort beskrivning av området..." data-category="residentials"></polygon>
-      <polygon class="building" points="533.56 598.8 533.56 603.96 521.5 606.9 518.98 603.72 518.98 599.52 518.86 599.4 518.86 595.56 522.58 593.64 526.36 593.76 528.34 596.28 531.04 595.62 532.3 596.16 533.56 598.8" data-title="Oh la la Byggnad" data-description="En kort beskrivning av området..." data-category="residentials"></polygon>
+      <polygon class="building" points="533.56 598.8 533.56 603.96 521.5 606.9 518.98 603.72 518.98 599.52 518.86 599.4 518.86 595.56 522.58 593.64 526.36 593.76 528.34 596.28 531.04 595.62 532.3 596.16 533.56 598.8" data-title="Test4" data-description="4" data-category="4"></polygon>
       <g>
         <polygon class="building" points="887.32 424.08 889.3 424.98 892.06 423.06 900.1 426.54 900.1 427.62 901.84 428.4 910.84 432.36 913.24 430.68 913.3 431.58 915.04 430.32 915.04 426.78 906.04 422.82 906.04 419.1 899.38 416.15 890.98 412.44 883.96 417.3 883.96 421.68 887.32 423.18 887.32 424.08" data-title="Oh la la Byggnad" data-description="En kort beskrivning av området..." data-category="residentials"></polygon>
         <polygon class="building" points="933.76 436.02 933.76 435.12 932.74 434.4 928.3 432.47 928.3 430.74 926.2 429.42 925.6 429.15 917.38 425.52 915.28 429.84 915.28 430.32 915.28 434.1 922.59 437.34 915.22 442.5 915.22 443.31 914.86 443.52 911.26 446.1 911.26 446.7 909.64 447.78 906.12 448.2 905.8 447.3 893.62 448.68 893.26 447.72 887.98 448.32 887.08 445.86 887.08 444.9 884.8 438.6 884.8 437.22 884.74 437.04 884.74 434.88 882.46 428.64 882.22 426.72 876.52 427.38 876.16 427.86 876.16 428.04 873.1 428.4 873.1 430.98 875.86 438.48 877.84 444 877.84 444.96 878.14 445.74 880.42 452.04 882.16 456.9 882.16 457.86 882.64 459.18 894.64 457.8 896.92 457.56 896.92 458.52 907.12 457.38 911.74 456.84 911.74 457.8 913.42 457.62 920.5 452.64 928.12 447.3 937.12 441 937.12 437.46 933.76 436.02" data-title="Oh la la Byggnad" data-description="En kort beskrivning av området..." data-category="residentials"></polygon>

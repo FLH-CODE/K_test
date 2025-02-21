@@ -1,33 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOMContentLoaded event triggered'); // Logga för att se om DOMContentLoaded triggas
+  console.log('DOMContentLoaded event triggered'); // Log to see if DOMContentLoaded is triggered
 
-  // Variabler för infoBox, clickBox, filterPanel och SVG-objekt
+  // Variables for infoBox, clickBox, filterPanel, and SVG object
   const infoBox = document.getElementById('infoBox');
   const clickBox = document.getElementById('clickBox');
   const filterPanel = document.getElementById('filterPanel');
   const svgObject = document.querySelector('object[type="image/svg+xml"]');
-  let selectedElement = null; // Definiera selectedElement i det globala sammanhanget
+  let selectedElement = null; // Define selectedElement in the global context
 
   if (!svgObject) {
-    console.error('SVG object not found'); // Logga om SVG-objektet inte hittas
+    console.error('SVG object not found'); // Log if the SVG object is not found
     return;
   }
 
-  // Ladda SVG-innehållet och lägg till event listeners
+  // Ensure checkboxes are checked on startup
+  const checkboxes = filterPanel.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = true;
+  });
+
+  // Load SVG content and add event listeners
   svgObject.addEventListener('load', function() {
-    console.log('SVG loaded'); // Logga för att se om SVG-filen laddas
+    console.log('SVG loaded'); // Log to see if the SVG file is loaded
 
     const svgDoc = svgObject.contentDocument;
     if (!svgDoc) {
-      console.error('SVG contentDocument is null'); // Logga om contentDocument är null
+      console.error('SVG contentDocument is null'); // Log if contentDocument is null
       return;
     }
 
     const svgElement = svgDoc.documentElement;
     const buildings = svgDoc.querySelectorAll('.building');
-    console.log('Buildings found:', buildings.length); // Logga antalet byggnader som hittas
+    console.log('Buildings found:', buildings.length); // Log the number of buildings found
 
-    // Hantera mouseover, mousemove och mouseout för byggnader
+    // Handle mouseover, mousemove, and mouseout for buildings
     buildings.forEach(building => {
       building.addEventListener('mouseover', function(event) {
         const title = event.target.getAttribute('data-title');
@@ -47,25 +53,25 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       building.addEventListener('click', function(event) {
-        event.stopPropagation(); // Förhindra att svgDoc-klickhändelsen triggas
+        event.stopPropagation(); // Prevent svgDoc click event from being triggered
         const title = event.target.getAttribute('data-title');
         const description = event.target.getAttribute('data-description');
         clickBox.innerHTML = `<h3>${title}</h3><p>${description}</p>`;
         clickBox.style.display = 'block';
-        selectedElement = event.target; // Sätt selectedElement till det klickade elementet
+        selectedElement = event.target; // Set selectedElement to the clicked element
       });
     });
 
-    // Dölj clickBox när man klickar på SVG-kartan
+    // Hide clickBox when clicking on the SVG map
     svgDoc.addEventListener('click', function(event) {
-      console.log('SVG clicked'); // Lägg till logg för att se om eventet triggas
+      console.log('SVG clicked'); // Add log to see if the event is triggered
       if (clickBox.style.display === 'block') {
         clickBox.style.display = 'none';
-        console.log('clickBox hidden'); // Lägg till logg för att se om clickBox döljs
+        console.log('clickBox hidden'); // Add log to see if clickBox is hidden
       }
     });
 
-    // Hantera zoom och pan-funktionalitet
+    // Handle zoom and pan functionality
     let scale = 1;
     let isPanning = false;
     let startX, startY;
@@ -166,11 +172,40 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
       }
     }, { passive: false });
+
+    // Apply filters on startup
+    applyFilters();
+
+    // Add hover effect for checkboxes and their labels
+    checkboxes.forEach(checkbox => {
+      const label = checkbox.parentElement;
+
+      const addHighlight = () => {
+        const category = checkbox.getAttribute('data-filter');
+        buildings.forEach(building => {
+          if (building.getAttribute('data-category') === category) {
+            building.classList.add('highlight');
+            building.style.display = 'block'; // Ensure the building is visible
+          }
+        });
+      };
+
+      const removeHighlight = () => {
+        buildings.forEach(building => {
+          building.classList.remove('highlight');
+          applyFilters(); // Reapply filters to reset visibility
+        });
+      };
+
+      checkbox.addEventListener('mouseover', addHighlight);
+      checkbox.addEventListener('mouseout', removeHighlight);
+      label.addEventListener('mouseover', addHighlight);
+      label.addEventListener('mouseout', removeHighlight);
+    });
   });
 
-  // Filterfunktion
-  filterPanel.addEventListener('change', function() {
-    const checkboxes = filterPanel.querySelectorAll('input[type="checkbox"]');
+  // Filter function
+  function applyFilters() {
     const svgDoc = svgObject.contentDocument;
     const buildings = svgDoc.querySelectorAll('.building');
 
@@ -186,9 +221,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       building.style.display = isVisible ? 'block' : 'none';
     });
-  });
+  }
 
-  // Hantera navigering utan swipe-effekt
+  filterPanel.addEventListener('change', applyFilters);
+
+  // Handle navigation without swipe effect
   const menuLinks = document.querySelectorAll('.menu a');
 
   menuLinks.forEach(link => {

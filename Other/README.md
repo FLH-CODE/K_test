@@ -1,5 +1,7 @@
 Lathund för att arbeta med projektet
 1. Installera beroenden
+Installera https://nodejs.org/en
+Starta om datorn
 För att säkerställa att alla nödvändiga beroenden är installerade, kör följande kommando i projektets rotkatalog:
 npm install
 
@@ -16,7 +18,7 @@ Visa huvudprojektet: Öppna Index.html i din webbläsare för att se huvudprojek
 Här är en översikt över de viktigaste filerna och deras syften:
 
 server.js: Serverfilen som hanterar backend och sparar SVG-filer.
-public/Index.html: Huvudsidan för projektet.
+index.html: Huvudsidan för projektet.
 public/admin.html: Adminsidan för att redigera SVG-element.
 public/js/main.js: JavaScript-fil för huvudprojektet.
 public/js/admin.js: JavaScript-fil för adminsidan.
@@ -26,8 +28,6 @@ fix/fixSvgAttributes.js: Skript för att fixa SVG-attribut.
 fix/fixSvgTags.js: Skript för att fixa SVG-taggar.
 5. Kommandon för att köra fix-skript
 För att köra fix-skripten, använd följande kommandon i projektets rotkatalog:
-
-
 
 för att se de olika sidorna är adressen:
 http://localhost:3000/admin.html

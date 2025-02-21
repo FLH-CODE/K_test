@@ -1,0 +1,6 @@
+{
+    // Set the host for Live Server
+    "liveServer.settings.host": "127.0.0.1",
+    // Set the port number for Live Preview
+    "livePreview.portNumber": 3000
+}

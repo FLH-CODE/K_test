@@ -56,5 +56,14 @@
 </div>
 </div>
 <script src="js/map.js"></script>
+<script>
+  // Ensure checkboxes are checked on startup
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('#filterPanel input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = true;
+    });
+  });
+</script>
 </body>
 </html>
